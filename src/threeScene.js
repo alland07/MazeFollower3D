@@ -84,9 +84,9 @@ function animate() {
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
   if (mazeMesh) {
-  mazeMesh.rotateX = x;
-  mazeMesh.rotateY = y;
-  mazeMesh.rotateZ = z;
+    mazeMesh.rotateX += x;
+    mazeMesh.rotateY += y;
+    mazeMesh.rotateZ += z;
   }
 
 }
