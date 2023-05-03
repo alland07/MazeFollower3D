@@ -5,6 +5,11 @@ gyroscope.addEventListener("reading", (e) => {
   console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
   console.log(`Angular velocity along the Z-axis ${gyroscope.z}`);
 });
+
+gyroscope.addEventListener("error", (e) => {
+  alert('Gyro not working');
+});
+
 gyroscope.start();
 
 
