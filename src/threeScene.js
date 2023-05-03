@@ -4,9 +4,6 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
 
-let mesh;
-
-
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
 
@@ -47,13 +44,15 @@ const material = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0.25
 })
 
+
+let mazeMesh;
+
 const loader = new STLLoader()
 loader.load(
     '/maze.stl',
     function (geometry) {
-         mesh = new THREE.Mesh(geometry, material)
-
-        scene.add(mesh)
+      let mazeMesh = new THREE.Mesh(geometry, material);
+      scene.add(mazeMesh);
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
@@ -77,20 +76,24 @@ const stats = new Stats()
 function animate() {
     requestAnimationFrame(animate)
     controls.update();
-    updateMesh();
+    updateMesh(mazeMesh);
     render();
     stats.update()
 }
 
-const updateMesh = () => {
+const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
-  mesh.rotateX = x;
-  mesh.rotateY = y;
-  mesh.rotateZ = z;
+  // debugger;
+  if (mazeMesh) {
+  mazeMesh.rotateX = x;
+  mazeMesh.rotateY = y;
+  mazeMesh.rotateZ = z;
+  }
+
 }
 
 function render() {
-    renderer.render(scene, camera)
+  renderer.render(scene, camera)
 }
 
 animate()
