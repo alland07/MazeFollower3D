@@ -26,8 +26,8 @@ const displayHtml = () => {
 
 export const gyroValues = () => {
   return {
-    x: gyroscope.x,
-    y: gyroscope.y,
-    z: gyroscope.z
+    x: gyroscope.x ? gyroscope.x : 0.1,
+    y: gyroscope.y ? gyroscope.y : 0.1,
+    z: gyroscope.z ? gyroscope.z : 0.1
   }
 }
