@@ -76,7 +76,8 @@ const stats = new Stats()
 
 function animate() {
     requestAnimationFrame(animate)
-    controls.update()
+    controls.update();
+    updateMesh();
     render();
     stats.update()
 }
