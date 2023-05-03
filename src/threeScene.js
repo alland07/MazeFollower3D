@@ -4,6 +4,9 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
 
+let mesh;
+
+
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
 
@@ -48,11 +51,8 @@ const loader = new STLLoader()
 loader.load(
     '../public/maze.stl',
     function (geometry) {
-        const mesh = new THREE.Mesh(geometry, material)
-        const gyro = gyroValues();
-        mesh.rotateX = gyro.x ? gyro.x : 0.1;
-        mesh.rotateY = gyro.y ? gyro.y : 0.1;
-        mesh.rotateZ = gyro.z ? gyro.z : 0.1;
+         mesh = new THREE.Mesh(geometry, material)
+
         scene.add(mesh)
     },
     (xhr) => {
@@ -65,6 +65,7 @@ loader.load(
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
+  
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
     renderer.setSize(window.innerWidth, window.innerHeight)
@@ -76,12 +77,16 @@ const stats = new Stats()
 
 function animate() {
     requestAnimationFrame(animate)
-
     controls.update()
-
-    render()
-
+    render();
     stats.update()
+}
+
+const updateMesh = () => {
+  const {x,y,z} = gyroValues();
+  mesh.rotateX = x;
+  mesh.rotateY = y;
+  mesh.rotateZ = z;
 }
 
 function render() {
