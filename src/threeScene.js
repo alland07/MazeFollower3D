@@ -49,7 +49,7 @@ const material = new THREE.MeshPhysicalMaterial({
 
 const loader = new STLLoader()
 loader.load(
-    '../public/maze.stl',
+    '/maze.stl',
     function (geometry) {
          mesh = new THREE.Mesh(geometry, material)
 
@@ -73,7 +73,6 @@ function onWindowResize() {
 }
 
 const stats = new Stats()
-
 
 function animate() {
     requestAnimationFrame(animate)
