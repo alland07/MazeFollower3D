@@ -1,8 +1,7 @@
 let gyroscope = new Gyroscope({ frequency: 60 });
 
 gyroscope.addEventListener("reading", (e) => {
-  alert(gyroscope.x);
-  displayHtml();
+    displayHtml();
 });
 
 gyroscope.addEventListener("error", (e) => {
@@ -12,14 +11,12 @@ gyroscope.addEventListener("error", (e) => {
 gyroscope.start();
 
 const displayHtml = () => {
-    setInterval(function () {  
-      document.querySelector('#app').innerHTML = `
-      <div>
-        ${gyroscope.x ? gyroscope.x : 0}
-        <br>
-        ${gyroscope.y ? gyroscope.y : 0}
-        <br>
-        ${gyroscope.z ? gyroscope.z : 0}
-      </div>
-    `}, 100);
+  document.querySelector('#app').innerHTML = `
+  <div>
+    ${gyroscope.x ? gyroscope.x : 0}
+    <br>
+    ${gyroscope.y ? gyroscope.y : 0}
+    <br>
+    ${gyroscope.z ? gyroscope.z : 0}
+  </div>`
 };
