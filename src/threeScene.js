@@ -194,6 +194,7 @@ export const changeMesh = (x,y,z) => {
   const absoluteY = Math.abs(y);
   const absoluteZ = Math.abs(z);
   if (absoluteX > 2 || absoluteY > 2 || absoluteZ > 2) {
+    alert('getAbsolute');
     scene.remove(mazeMesh);
       if (mazeUrl = maze1){
         mazeUrl = maze2;
