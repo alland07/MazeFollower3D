@@ -89,22 +89,26 @@ const material = new THREE.MeshPhysicalMaterial({
 
 
 let mazeMesh;
+let mazeUrl = '/maze.stl';
 
-const loader = new STLLoader()
-loader.load(
-    '/maze.stl',
-    function (geometry) {
-      mazeMesh = new THREE.Mesh(geometry, material);
-      mazeMesh.rotateX(150);
-      scene.add(mazeMesh);
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-    },
-    (error) => {
-        console.log(error)
-    }
-)
+const loadMaze = (maze) => {
+  const loader = new STLLoader()
+  loader.load(
+      maze,
+      function (geometry) {
+        mazeMesh = new THREE.Mesh(geometry, material);
+        mazeMesh.rotateX(150);
+        scene.add(mazeMesh);
+      },
+      (xhr) => {
+          console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+      },
+      (error) => {
+          console.log(error)
+      }
+  )
+}
+loadMaze(mazeUrl);
 
 window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
@@ -171,9 +175,9 @@ const updateMesh = (mazeMesh) => {
     mazeMesh.rotateZ(convertDegInRad(z))
     */
     
-    sphere.position.x += (convertDegInRad(x));
-    sphere.position.y += (convertDegInRad(y))
-    sphere.position.z += (convertDegInRad(z));
+    sphere.position.x += (convertDegInRad(1 * 10));
+    sphere.position.y += (convertDegInRad(1 * 10))
+    sphere.position.z += (convertDegInRad(1 * 10));
 
   }
 }
