@@ -7,8 +7,24 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
 
 //Physics
-const world = new CANNON.World()
-world.gravity.set(0, -9.82, 0)
+const world = new CANNON.World();
+world.gravity.set(0, -9.82, 0);
+
+//Materials
+const concreteMaterial = new CANNON.Material('concrete');
+const plasticMaterial = new CANNON.Material('plastic');
+
+const concretePlasticContactMaterial = new CANNON.ContactMaterial(
+  concreteMaterial,
+  plasticMaterial,
+  {
+    friction: 0.1,
+    restitution: 1,
+  }
+)
+
+world.addContactMaterial(concretePlasticContactMaterial);
+
 const sphereShape = new CANNON.Sphere(0.5);
 const sphereBody = new CANNON.Body({
   mass: 1,
@@ -120,6 +136,9 @@ function animate() {
     const elapsedTime = clock.getElapsedTime();
     const deltaTime = elapsedTime - oldElapsedTime;
     oldElapsedTime = elapsedTime;
+
+    sphereBody.applyForce(new CANNON.Vec3(- 0.5, 0, 0), sphereBody.position)
+
     world.step(1 / 60, deltaTime, 3);
     sphere.position.copy(sphereBody.position);
 
