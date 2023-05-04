@@ -7,27 +7,27 @@ class DataPoint {
     this.maxValue = 10;
   }
 
-  push(data){
+  pushValue(x, y, z) {
     //X
     if (this.dataX.length <= this.maxValue) {
-      this.addElementToArray(this.dataX, data.x, 'x');
+      this.addElementToArray(this.dataX, x, 'x');
     } else {
       this.dataX.pop();
-      this.addElementToArray(this.dataX, data.x, 'x');
+      this.addElementToArray(this.dataX, x, 'x');
     }
     //Y
     if (this.dataY.length <= this.maxValue) {
-      this.addElementToArray(this.dataY, data.y, 'y');
+      this.addElementToArray(this.dataY, y, 'y');
     } else {
       this.dataY.pop();
-      this.addElementToArray(this.dataY, data.y, 'y');
+      this.addElementToArray(this.dataY, y, 'y');
     }
     //Z
     if (this.dataZ.length <= this.maxValue) {
-      this.addElementToArray(this.dataZ, data.z, 'z');
+      this.addElementToArray(this.dataZ, z, 'z');
     } else {
       this.dataZ.pop();
-      this.addElementToArray(this.dataZ, data.z, 'z');
+      this.addElementToArray(this.dataZ, z, 'z');
     }
   }
 
@@ -38,7 +38,7 @@ class DataPoint {
 
   filterData(arr, value) {
     const dataLength = arr.length;
-    let total;
+    let total = 0;
     if (dataLength > 0) {
       for (let i = 0; i < dataLength; i++) {
         total += arr[i];
