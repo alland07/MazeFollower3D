@@ -51,7 +51,7 @@ const loader = new STLLoader()
 loader.load(
     '/maze.stl',
     function (geometry) {
-      let mazeMesh = new THREE.Mesh(geometry, material);
+      mazeMesh = new THREE.Mesh(geometry, material);
       scene.add(mazeMesh);
     },
     (xhr) => {
@@ -87,12 +87,13 @@ const convertDegInRad = (value) => {
 
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
+
   displayHtml(x, y,z);
-  if (mazeMesh) {
-    // mazeMesh.rotateX(x) += x * 1000;
-    mazeMesh.rotateX(convertDegInRad(x * 500));
-    mazeMesh.rotateY(convertDegInRad(y * 500));
-    mazeMesh.rotateZ(convertDegInRad(z * 500));
+  if (mazeMesh && (x > 0 || y > 0 || z > 0)) {
+    console.log('test')
+    mazeMesh.rotateX(convertDegInRad(x * 100));
+    mazeMesh.rotateY(convertDegInRad(y * 100))
+    mazeMesh.rotateZ(convertDegInRad(z * 100));
   }
 }
 
