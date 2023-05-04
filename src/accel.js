@@ -1,4 +1,5 @@
 import DataPoint from "./models/dataPoint";
+import { changeMesh } from "./threeScene";
 
 const accel = new Accelerometer({ frequency: 60 });
 const dataPoint = new DataPoint();
@@ -18,6 +19,7 @@ const getAccel = () => {
   const absoluteX = Math.abs(accel.x);
   const absoluteY = Math.abs(accel.y);
   const absoluteZ = Math.abs(accel.z);
+
   if (absoluteX > 20 || absoluteY > 20 || absoluteZ > 20) {
     changeMesh(absoluteX,absoluteY,absoluteZ);
   }

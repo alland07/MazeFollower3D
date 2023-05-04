@@ -91,7 +91,7 @@ const material = new THREE.MeshPhysicalMaterial({
 let mazeMesh;
 const maze1 = 'maze.stl';
 const maze2 = 'ballmazefirst.stl';
-let mazeUrl = maze1;
+let mazeUrl = maze2;
 
 const loadMaze = (maze) => {
   const loader = new STLLoader()
