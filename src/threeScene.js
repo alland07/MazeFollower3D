@@ -34,16 +34,6 @@ const sphereBody = new CANNON.Body({
 
 world.addBody(sphereBody);
 
-const floorShape = new CANNON.Plane();
-const floorBody = new CANNON.Body();
-floorBody.mass = 0;
-floorBody.addShape(floorShape);
-floorBody.quaternion.setFromAxisAngle(
-  new CANNON.Vec3(- 1, 0, 0),
-  Math.PI * 0.5,
-)
-
-world.addBody(floorBody);
 //End physics section
 
 const scene = new THREE.Scene()
@@ -125,6 +115,21 @@ function onWindowResize() {
     render()
 }
 
+const floorShape = new CANNON.Plane();
+const floorBody = new CANNON.Body({
+  mass: 1,
+  position: new CANNON.Vec3(0,10,10),
+  shape: mazeMesh
+});
+floorBody.mass = 0;
+floorBody.addShape(floorShape);
+floorBody.quaternion.setFromAxisAngle(
+  new CANNON.Vec3(- 1, 0, 0),
+  Math.PI * 0.5,
+)
+
+world.addBody(floorBody);
+
 const stats = new Stats()
 
 const clock = new THREE.Clock();
@@ -137,10 +142,11 @@ function animate() {
     const deltaTime = elapsedTime - oldElapsedTime;
     oldElapsedTime = elapsedTime;
 
-    sphereBody.applyForce(new CANNON.Vec3(- 0.5, 0, 0), sphereBody.position)
+    sphereBody.applyForce(new CANNON.Vec3(0, 0, 0), sphereBody.position)
 
     world.step(1 / 60, deltaTime, 3);
     sphere.position.copy(sphereBody.position);
+    // mazeMesh.position.copy(floorBody.position);
 
 
     //End Physics Section
@@ -159,10 +165,16 @@ const convertDegInRad = (value) => {
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
   if (mazeMesh && (x > 0 || y > 0 || z > 0)) {
-    console.log('test')
-    mazeMesh.rotateX(convertDegInRad(x));
+    /*
+    mazeMesh.rotateX(convertDegInRad(x))
     mazeMesh.rotateY(convertDegInRad(y))
-    mazeMesh.rotateZ(convertDegInRad(z));
+    mazeMesh.rotateZ(convertDegInRad(z))
+    */
+    
+    sphere.position.x += (convertDegInRad(x));
+    sphere.position.y += (convertDegInRad(y))
+    sphere.position.z += (convertDegInRad(z));
+
   }
 }
 
