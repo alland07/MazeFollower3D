@@ -1,10 +1,10 @@
 import DataPoint from "./dataPoint";
 
 let gyroscope = new Gyroscope({ frequency: 60 });
-const dataPoint = new DataPoint();
+
 
 gyroscope.addEventListener("reading", (e) => {
-    displayHtml();
+    //
 });
 
 gyroscope.addEventListener("error", (e) => {
@@ -13,18 +13,8 @@ gyroscope.addEventListener("error", (e) => {
 
 gyroscope.start();
 
-const displayHtml = () => {
-  document.querySelector('.values').innerHTML = `
-  <div>
-    ${gyroscope.x ? gyroscope.x : 0}
-    <br>
-    ${gyroscope.y ? gyroscope.y : 0}
-    <br>
-    ${gyroscope.z ? gyroscope.z : 0}
-  </div>`
-};
-
 export const gyroValues = () => {
+  const dataPoint = new DataPoint();
   return {
     x: gyroscope.x,
     y: gyroscope.y,
