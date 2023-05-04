@@ -175,12 +175,6 @@ const updateMesh = (mazeMesh) => {
     mazeMesh.rotateX(convertDegInRad(x))
     mazeMesh.rotateY(convertDegInRad(y))
     mazeMesh.rotateZ(convertDegInRad(z))
-
-    /*
-    sphere.position.x += x;
-    sphere.position.y += y;
-    sphere.position.z += z;
-    */
   }
 }
 

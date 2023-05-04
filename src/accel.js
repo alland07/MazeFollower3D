@@ -5,15 +5,18 @@ const dataPoint = new DataPoint();
 
 accel.addEventListener("reading", (e) => {
   dataPoint.pushValue(accel.x, accel.y, accel.z);
+  setInterval(() => {
+   alert('accel.x, accel.y, accel.z :', accel.x, accel.y, accel.z);
+  }, 1000)
   //dataPoint.derivate();
-  //getAccel();
+  getAccel();
 }); 
 
 accel.start();
 
 const getAccel = () => {
   const {x,y,z} = dataPoint.getDataFilter();
-  alert('accel');
+
   const absoluteX = Math.abs(x);
   const absoluteY = Math.abs(y);
   const absoluteZ = Math.abs(z);
