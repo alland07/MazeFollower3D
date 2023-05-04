@@ -5,7 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
-import { getAccel } from './accel';
 
 //Physics
 const world = new CANNON.World();
