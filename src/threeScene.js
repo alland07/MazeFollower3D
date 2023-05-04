@@ -165,7 +165,7 @@ function animate() {
 }
 
 const convertDegInRad = (value) => {
-  return value * (Math.PI/180);
+  return value * Math.PI/180;
 }
 
 const updateMesh = (mazeMesh) => {
