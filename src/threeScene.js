@@ -96,18 +96,18 @@ let mazeUrl = maze1;
 const loadMaze = (maze) => {
   const loader = new STLLoader()
   loader.load(
-      maze,
-      function (geometry) {
-        mazeMesh = new THREE.Mesh(geometry, material);
-        mazeMesh.rotateX(150);
-        scene.add(mazeMesh);
-      },
-      (xhr) => {
-          console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-      },
-      (error) => {
-          console.log(error)
-      }
+    maze,
+    function (geometry) {
+      mazeMesh = new THREE.Mesh(geometry, material);
+      mazeMesh.rotateX(150);
+      scene.add(mazeMesh);
+    },
+    (xhr) => {
+        console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    },
+    (error) => {
+        console.log(error)
+    }
   )
 }
 loadMaze(mazeUrl);
@@ -190,12 +190,12 @@ function render() {
 
 export const changeMesh = (x,y,z) => {
   scene.remove(mazeMesh);
-    if (mazeUrl = maze1){
-      mazeUrl = maze2;
-    } else {
-      mazeUrl = maze1;
-    }
-    loadMaze(mazeUrl);
+  if (mazeUrl = maze1){
+    mazeUrl = maze2;
+  } else {
+    mazeUrl = maze1;
+  }
+  loadMaze(mazeUrl);
 }
 
 animate()

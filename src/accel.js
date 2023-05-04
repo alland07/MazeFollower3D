@@ -6,7 +6,7 @@ const dataPoint = new DataPoint();
 accel.addEventListener("reading", (e) => {
   alert('accel');
   dataPoint.pushValue(accel.x, accel.y, accel.z);
-  dataPoint.derivate();
+  //dataPoint.derivate();
   //getAccel();
 }); 
 
