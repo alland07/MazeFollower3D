@@ -1,10 +1,9 @@
 import DataPoint from "./dataPoint";
-
 let gyroscope = new Gyroscope({ frequency: 60 });
-
+const dataPoint = new DataPoint();
 
 gyroscope.addEventListener("reading", (e) => {
-    //
+    dataPoint.push({x: gyroscope.x, y: gyroscope.y, z: gyroscope.z});
 });
 
 gyroscope.addEventListener("error", (e) => {
@@ -14,10 +13,6 @@ gyroscope.addEventListener("error", (e) => {
 gyroscope.start();
 
 export const gyroValues = () => {
-  const dataPoint = new DataPoint();
-  return {
-    x: gyroscope.x,
-    y: gyroscope.y,
-    z: gyroscope.z
-  }
+  const {x, y, z} = dataPoint.getDataFilter();
+  return {x,y,z}
 }

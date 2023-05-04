@@ -1,14 +1,61 @@
 class DataPoint {
   constructor() {
-
-  }
-  
-  setFilter(n) {
-
+    this.dataX = [];
+    this.dataY = [];
+    this.dataZ = [];
+    this.dataFilter = {x: 0, y: 0, z: 0};
+    this.maxValue = 10;
   }
 
   push(data){
+    //X
+    if (this.dataX.length <= this.maxValue) {
+      this.addElementToArray(this.dataX, data.x, 'x');
+    } else {
+      this.dataX.pop();
+      this.addElementToArray(this.dataX, data.x, 'x');
+    }
+    //Y
+    if (this.dataY.length <= this.maxValue) {
+      this.addElementToArray(this.dataY, data.y, 'y');
+    } else {
+      this.dataY.pop();
+      this.addElementToArray(this.dataY, data.y, 'y');
+    }
+    //Z
+    if (this.dataZ.length <= this.maxValue) {
+      this.addElementToArray(this.dataZ, data.z, 'z');
+    } else {
+      this.dataZ.pop();
+      this.addElementToArray(this.dataZ, data.z, 'z');
+    }
+  }
 
+  addElementToArray(arr, value, axis){
+    arr.unshift(value);
+    this.filterData(arr, axis);
+  }
+
+  filterData(arr, value) {
+    const dataLength = arr.length;
+    let total;
+    if (dataLength > 0) {
+      for (let i = 0; i < dataLength; i++) {
+        total += arr[i];
+      }
+      const moyenne = total/dataLength;
+      switch (value) {
+        case 'x':
+          this.dataFilter.x = moyenne;
+          break;
+        case 'y':
+          this.dataFilter.y = moyenne;
+          break;
+        case 'z':
+        this.dataFilter.z = moyenne;
+        break;
+      }
+    }
   }
 
   getDataFilter(){

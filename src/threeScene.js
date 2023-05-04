@@ -1,8 +1,34 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon';
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
+
+//Physics
+const world = new CANNON.World()
+world.gravity.set(0, -9.82, 0)
+const sphereShape = new CANNON.Sphere(0.5);
+const sphereBody = new CANNON.Body({
+  mass: 1,
+  position: new CANNON.Vec3(0,10,10),
+  shape: sphereShape
+})
+
+world.addBody(sphereBody);
+
+const floorShape = new CANNON.Plane();
+const floorBody = new CANNON.Body();
+floorBody.mass = 0;
+floorBody.addShape(floorShape);
+floorBody.quaternion.setFromAxisAngle(
+  new CANNON.Vec3(- 1, 0, 0),
+  Math.PI * 0.5,
+)
+
+world.addBody(floorBody);
+//End physics section
 
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
@@ -23,7 +49,18 @@ const geometry = new THREE.SphereGeometry( 1, 32, 16 );
 const materialSphere = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
 const sphere = new THREE.Mesh( geometry, materialSphere ); scene.add( sphere );
 
-sphere.position.z = 17;
+
+// let sphereBody = new CANNON.Body({
+//   mass: 5, // kg
+//   position: new CANNON.Vec3(0, 17, 0), // m
+//   shape: new CANNON.Sphere(1)
+// });
+
+//Add sphere in canon world
+// world.addBody(sphereBody);
+
+//End sphere in canon world
+//sphere.position.z = 17;
 
 const renderer = new THREE.WebGLRenderer()
 renderer.outputEncoding = THREE.sRGBEncoding
@@ -52,6 +89,7 @@ loader.load(
     '/maze.stl',
     function (geometry) {
       mazeMesh = new THREE.Mesh(geometry, material);
+      mazeMesh.rotateX(150);
       scene.add(mazeMesh);
     },
     (xhr) => {
@@ -73,7 +111,21 @@ function onWindowResize() {
 
 const stats = new Stats()
 
+const clock = new THREE.Clock();
+let oldElapsedTime = 0;
+
 function animate() {
+
+    //Physics
+    const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - oldElapsedTime;
+    oldElapsedTime = elapsedTime;
+    world.step(1 / 60, deltaTime, 3);
+    sphere.position.copy(sphereBody.position);
+
+
+    //End Physics Section
+
     requestAnimationFrame(animate)
     controls.update();
     updateMesh(mazeMesh);
