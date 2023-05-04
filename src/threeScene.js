@@ -84,15 +84,19 @@ function animate() {
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
   if (mazeMesh) {
-    mazeMesh.rotateX += x*100;
-    mazeMesh.rotateY += y *100;
-    mazeMesh.rotateZ += z *100;
+    // mazeMesh.rotateX(x) += x * 1000;
+    mazeMesh.rotateX(convertDegInRad(x * 500));
+    mazeMesh.rotateY(convertDegInRad(y * 500));
+    mazeMesh.rotateZ(convertDegInRad(z * 500));
   }
-
 }
 
 function render() {
   renderer.render(scene, camera)
+}
+
+const convertDegInRad = (value) => {
+  return value * (Math.PI/180);
 }
 
 animate()
