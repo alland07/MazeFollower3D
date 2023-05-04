@@ -6,7 +6,7 @@ const dataPoint = new DataPoint();
 accel.addEventListener("reading", (e) => {
   dataPoint.pushValue(accel.x, accel.y, accel.z);
   setInterval(() => {
-   alert(accel);
+   alert(accel.x);
   }, 10000)
   //dataPoint.derivate();
   getAccel();
