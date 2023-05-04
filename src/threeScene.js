@@ -137,7 +137,6 @@ floorBody.quaternion.setFromAxisAngle(
 world.addBody(floorBody);
 
 const stats = new Stats()
-
 const clock = new THREE.Clock();
 let oldElapsedTime = 0;
 
@@ -183,13 +182,17 @@ function render() {
 }
 
 export const changeMesh = (x,y,z) => {
+
   scene.remove(mazeMesh);
-  if (mazeUrl = maze1){
+
+  if (mazeUrl === maze1){
     mazeUrl = maze2;
   } else {
     mazeUrl = maze1;
   }
+
   loadMaze(mazeUrl);
+  render();
 }
 
 animate()
