@@ -81,6 +81,10 @@ function animate() {
     stats.update()
 }
 
+const convertDegInRad = (value) => {
+  return value * (Math.PI/180);
+}
+
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
   if (mazeMesh) {
@@ -93,10 +97,6 @@ const updateMesh = (mazeMesh) => {
 
 function render() {
   renderer.render(scene, camera)
-}
-
-const convertDegInRad = (value) => {
-  return value * (Math.PI/180);
 }
 
 animate()
