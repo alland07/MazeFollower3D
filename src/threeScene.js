@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 import {gyroValues} from "./gyro"
+import { getAccel } from './accel';
 
 //Physics
 const world = new CANNON.World();
@@ -89,7 +90,9 @@ const material = new THREE.MeshPhysicalMaterial({
 
 
 let mazeMesh;
-let mazeUrl = '/maze.stl';
+const maze1 = 'maze.stl';
+const maze2 = 'ballmazefirst.stl';
+let mazeUrl = maze1;
 
 const loadMaze = (maze) => {
   const loader = new STLLoader()
@@ -169,21 +172,36 @@ const convertDegInRad = (value) => {
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
   if (mazeMesh && (x > 0 || y > 0 || z > 0)) {
-    /*
+
     mazeMesh.rotateX(convertDegInRad(x))
     mazeMesh.rotateY(convertDegInRad(y))
     mazeMesh.rotateZ(convertDegInRad(z))
-    */
-    
-    sphere.position.x += (convertDegInRad(1 * 10));
-    sphere.position.y += (convertDegInRad(1 * 10))
-    sphere.position.z += (convertDegInRad(1 * 10));
 
+    /*
+    sphere.position.x += x;
+    sphere.position.y += y;
+    sphere.position.z += z;
+    */
   }
 }
 
 function render() {
   renderer.render(scene, camera)
+}
+
+export const changeMesh = (x,y,z) => {
+  const absoluteX = Math.abs(x);
+  const absoluteY = Math.abs(y);
+  const absoluteZ = Math.abs(z);
+  if (absoluteX > 2 || absoluteY > 2 || absoluteZ > 2) {
+    scene.remove(mazeMesh);
+      if (mazeUrl = maze1){
+        mazeUrl = maze2;
+      } else {
+        mazeUrl = maze1;
+      }
+      loadMaze(mazeUrl);
+  }
 }
 
 animate()

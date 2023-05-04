@@ -5,6 +5,9 @@ class DataPoint {
     this.dataZ = [];
     this.dataFilter = {x: 0, y: 0, z: 0};
     this.maxValue = 10;
+    this.time = Date.now();
+    this.oldData = 0;
+    this.deltaTimeSensor = 10;
   }
 
   pushValue(x, y, z) {
@@ -60,6 +63,13 @@ class DataPoint {
 
   getDataFilter(){
     return this.dataFilter;
+  }
+
+  derivate() {
+    const {x, y ,z} = this.dataFilter;
+    const norm = Math.pow(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+    const derivate = (10 * Math.abs(norm - this.oldData) / this.deltaTimeSensor);
+    this.oldData = norm;
   }
 }
 

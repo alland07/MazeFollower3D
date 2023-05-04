@@ -1,4 +1,4 @@
-import DataPoint from "./dataPoint";
+import DataPoint from "./models/dataPoint";
 let gyroscope = new Gyroscope({ frequency: 60 });
 const dataPoint = new DataPoint();
 
