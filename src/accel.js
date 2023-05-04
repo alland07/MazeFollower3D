@@ -4,9 +4,10 @@ const accel = new Accelerometer({ frequency: 60 });
 const dataPoint = new DataPoint();
 
 accel.addEventListener("reading", (e) => {
-    dataPoint.pushValue(accel.x, accel.y, accel.z);
-    dataPoint.derivate();
-    getAccel();
+  alert('accel');
+  dataPoint.pushValue(accel.x, accel.y, accel.z);
+  dataPoint.derivate();
+  //getAccel();
 }); 
 
 accel.start();
