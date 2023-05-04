@@ -14,5 +14,6 @@ gyroscope.start();
 
 export const gyroValues = () => {
   const {x, y, z} = dataPoint.getDataFilter();
+  alert(x,y,z);
   return {x,y,z}
 }
