@@ -13,5 +13,12 @@ accel.start();
 
 const getAccel = () => {
   const {x,y,z} = dataPoint.getDataFilter();
-  changeMesh(x,y,z);
+  alert('accel');
+  const absoluteX = Math.abs(x);
+  const absoluteY = Math.abs(y);
+  const absoluteZ = Math.abs(z);
+  if (absoluteX > 2 || absoluteY > 2 || absoluteZ > 2) {
+    changeMesh(absoluteX,absoluteY,absoluteZ);
+  }
+  
 }

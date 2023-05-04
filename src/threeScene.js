@@ -189,19 +189,13 @@ function render() {
 }
 
 export const changeMesh = (x,y,z) => {
-  const absoluteX = Math.abs(x);
-  const absoluteY = Math.abs(y);
-  const absoluteZ = Math.abs(z);
-  if (absoluteX > 2 || absoluteY > 2 || absoluteZ > 2) {
-    alert('getAbsolute');
-    scene.remove(mazeMesh);
-      if (mazeUrl = maze1){
-        mazeUrl = maze2;
-      } else {
-        mazeUrl = maze1;
-      }
-      loadMaze(mazeUrl);
-  }
+  scene.remove(mazeMesh);
+    if (mazeUrl = maze1){
+      mazeUrl = maze2;
+    } else {
+      mazeUrl = maze1;
+    }
+    loadMaze(mazeUrl);
 }
 
 animate()
