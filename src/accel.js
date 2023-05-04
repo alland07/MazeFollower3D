@@ -19,9 +19,7 @@ const getAccel = () => {
   const absoluteY = Math.abs(accel.y);
   const absoluteZ = Math.abs(accel.z);
 
-  changeMesh(absoluteX,absoluteY,absoluteZ);
-
   if (absoluteX > 20 || absoluteY > 20 || absoluteZ > 20) {
-//    changeMesh(absoluteX,absoluteY,absoluteZ);
+   changeMesh(absoluteX,absoluteY,absoluteZ);
   }
 }
