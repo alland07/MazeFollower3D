@@ -91,9 +91,9 @@ const updateMesh = (mazeMesh) => {
   displayHtml(x, y,z);
   if (mazeMesh && (x > 0 || y > 0 || z > 0)) {
     console.log('test')
-    mazeMesh.rotateX(convertDegInRad(x * 10));
-    mazeMesh.rotateY(convertDegInRad(y * 10))
-    mazeMesh.rotateZ(convertDegInRad(z * 10));
+    mazeMesh.rotateX(convertDegInRad(x));
+    mazeMesh.rotateY(convertDegInRad(y))
+    mazeMesh.rotateZ(convertDegInRad(z));
   }
 }
 
