@@ -87,6 +87,7 @@ const convertDegInRad = (value) => {
 
 const updateMesh = (mazeMesh) => {
   const {x,y,z} = gyroValues();
+  displayHtml(x, y,z);
   if (mazeMesh) {
     // mazeMesh.rotateX(x) += x * 1000;
     mazeMesh.rotateX(convertDegInRad(x * 500));
@@ -94,6 +95,22 @@ const updateMesh = (mazeMesh) => {
     mazeMesh.rotateZ(convertDegInRad(z * 500));
   }
 }
+
+const displayHtml = (x,y,z) => {
+
+  const domDiv = document.querySelector('.values')
+  if (!domDiv){
+    return;
+  } else {
+    domDiv.innerHTML =`<div>
+      ${x ? x : 0}
+      <br>
+      ${y ? y : 0}
+      <br>
+      ${z ? z : 0}
+    </div>`
+  }
+};
 
 function render() {
   renderer.render(scene, camera)

@@ -14,7 +14,7 @@ gyroscope.addEventListener("error", (e) => {
 gyroscope.start();
 
 const displayHtml = () => {
-  document.querySelector('#app').innerHTML = `
+  document.querySelector('.values').innerHTML = `
   <div>
     ${gyroscope.x ? gyroscope.x : 0}
     <br>

@@ -21,7 +21,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
+.values{
+  min-width: 100px;
+  height: min-height 100px;
+}
 canvas{
   width: 95vw;
   height: 100vh;
