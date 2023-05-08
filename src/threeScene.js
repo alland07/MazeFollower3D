@@ -166,7 +166,7 @@ const convertDegInRad = (value) => {
 
 const updateMesh = (mazeMesh, elapsedTime) => {
   const { x, y, z } = gyroValues();
-  if (mazeMesh) {
+  if (mazeMesh && (x > 0 || y > 0 || z > 0)) {
     mazeMesh.rotateX(convertDegInRad(x));
     mazeMesh.rotateY(convertDegInRad(y));
     mazeMesh.rotateZ(convertDegInRad(z));
